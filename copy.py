@@ -49,8 +49,8 @@ for t in TABLES:
                 'created_at',
                 'updated_at')
          ORDER BY table_name, ordinal_position;""" % t, True, DATABASE)
+    
     COLUMNS = process_columns(COLUMNS_TABLE)
-
     SELECT = create_select(t, COLUMNS, COLUMNS)
     INSERT = create_insert(t, COLUMNS, DATA_TYPE)
     UPDATE = create_update(t, COLUMNS, DATA_TYPE)
@@ -59,17 +59,18 @@ for t in TABLES:
     print()
     print("Processing table %s" % t)
 
-    ID_EXISTENTES, column_names = execute_sql("""
+    ID_EXISTS, column_names = execute_sql("""
         SELECT id
           FROM public.%s;""" % t, True, DATABASE)
-    ID_EXISTENTES = process_columns(ID_EXISTENTES)
+    
+    ID_EXISTS = process_columns(ID_EXISTS)
 
     lista, column_names = execute_sql(SELECT, True, DATABASE_SOURCE)
 
     print('Count lines %s: %s' % (t, len(lista)))
 
     TEXT = ''
-    ultimo = 'TABLE %s IS EMPTY' % t
+    last = 'TABLE %s IS EMPTY' % t
 
     for l in lista:
 
@@ -80,7 +81,7 @@ for t in TABLES:
 
         dic['table'] = t
 
-        if int(dic['id']) in ID_EXISTENTES:
+        if int(dic['id']) in ID_EXISTS:
 
             TEXT += UPDATE % dic
             last = 'UPDATE %(table)s %(id)s' % dic
