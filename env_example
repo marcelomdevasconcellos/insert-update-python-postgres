@@ -1,2 +1,3 @@
 DATABASE_SOURCE=psql://user:pass@host:port/name
 DATABASE=psql://user:pass@host:port/name
+TABLES=database1,database2,database3,...,databaseN
