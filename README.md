@@ -11,9 +11,9 @@ TABLES=database1,database2,database3,...,databaseN
 
 * Configure source database in DATABASE_SOURCE variable;
 * Configure destiny database in DATABASE variable;
-* Configure tablenames in TABLES variable;
+* Configure ordened tablenames in TABLES variable;
 
-2) Install django-environ: 
+2) Install requirements.txt: 
 
 ```
 pip install -r requirements.txt
